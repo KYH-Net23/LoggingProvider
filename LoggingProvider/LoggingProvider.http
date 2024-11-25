@@ -1,6 +1,6 @@
 @LoggingProvider_HostAddress = http://localhost:5108
 
-GET {{LoggingProvider_HostAddress}}/weatherforecast/
+GET {{LoggingProvider_HostAddress}}/LoggingProvider/
 Accept: application/json
 
 ###
