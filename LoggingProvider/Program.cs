@@ -19,11 +19,9 @@ namespace LoggingProvider
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();
