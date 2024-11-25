@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingProvider", "LoggingProvider\LoggingProvider.csproj", "{D916ED19-21D6-4A84-959A-96DAB9F9318C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D916ED19-21D6-4A84-959A-96DAB9F9318C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D916ED19-21D6-4A84-959A-96DAB9F9318C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D916ED19-21D6-4A84-959A-96DAB9F9318C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D916ED19-21D6-4A84-959A-96DAB9F9318C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88EDF9BB-D263-44CB-8E21-FF230A4F4CAC}
+	EndGlobalSection
+EndGlobal
