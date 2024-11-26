@@ -1,4 +1,4 @@
-﻿namespace LoggingProvider.Models
+﻿namespace LoggingProvider.Enums
 {
     public enum EventType
     {
