@@ -11,8 +11,7 @@ public class UserEventEntity
     public string EventName { get; set; } = null!;
 
     [Required]
-    [MaxLength(50)]
-    public string EventType { get; set; } = null!; // Enum?
+    public EventType EventType { get; set; }
 
     [Required]
     public DateTime EventTimeStamp { get; set; }

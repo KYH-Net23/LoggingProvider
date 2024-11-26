@@ -10,7 +10,7 @@ public class UserEventRequest
 
     [Required]
     [MaxLength(50)]
-    public string EventType { get; set; } = null!; // Enum?
+    public string EventType { get; set; } = null!;
 
     [Required]
     public DateTime EventTimeStamp { get; set; }
