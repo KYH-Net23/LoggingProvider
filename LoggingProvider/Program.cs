@@ -22,6 +22,7 @@ namespace LoggingProvider
             }
             builder.Services.AddDbContext<LoggingContext>(options => options.UseSqlServer(builder.Configuration["LoggingDbSecret"]));
             builder.Services.AddScoped<LoggingService>();
+            builder.Services.AddScoped<ReportingService>();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
