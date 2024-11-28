@@ -14,6 +14,7 @@ namespace LoggingProvider.Factories
                 EventTimeStamp = DateTime.UtcNow,
                 EventType = (EventType)Enum.Parse(typeof(EventType), request.EventType),
                 PageUrl = request.PageUrl ?? "",
+                SessionId = request.SessionId ?? "",
                 UserId = request.UserId ?? ""
             };
         }

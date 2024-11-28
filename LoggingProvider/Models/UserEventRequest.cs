@@ -13,8 +13,8 @@ public class UserEventRequest
     public string EventType { get; set; } = null!;
     [Required]
     public DateTime EventTimeStamp { get; set; }
-    [MaxLength(100)]
+    [MaxLength(300)]
     public string? PageUrl { get; set; }
-    [MaxLength(100)]
+    [MaxLength(300)]
     public string? SessionId { get; set; }
 }

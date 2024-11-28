@@ -17,4 +17,6 @@ public class UserEventEntity
     public DateTime EventTimeStamp { get; set; }
     [MaxLength(300)]
     public string? PageUrl { get; set; }
+    [MaxLength(300)]
+    public string? SessionId { get; set; }
 }

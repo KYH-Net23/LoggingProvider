@@ -13,16 +13,16 @@ namespace LoggingProvider
 
             builder.Services.AddMemoryCache();
 
-            var vaultUri = new Uri($"{builder.Configuration["KeyVault"]!}");
+            //var vaultUri = new Uri($"{builder.Configuration["KeyVault"]!}");
 
-            if (builder.Environment.IsDevelopment())
-            {
-                builder.Configuration.AddAzureKeyVault(vaultUri, new VisualStudioCredential());
-            }
-            else if (builder.Environment.IsProduction())
-            {
-                builder.Configuration.AddAzureKeyVault(vaultUri, new DefaultAzureCredential());
-            }
+            //if (builder.Environment.IsDevelopment())
+            //{
+            //    builder.Configuration.AddAzureKeyVault(vaultUri, new VisualStudioCredential());
+            //}
+            //else if (builder.Environment.IsProduction())
+            //{
+            //    builder.Configuration.AddAzureKeyVault(vaultUri, new DefaultAzureCredential());
+            //}
             //builder.Services.AddDbContext<LoggingContext>(options => options.UseSqlServer(builder.Configuration["LoggingDbSecret"]));
             builder.Services.AddDbContext<LoggingContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TestingConnection")));
             builder.Services.AddScoped<LoggingService>();
