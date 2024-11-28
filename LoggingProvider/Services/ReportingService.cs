@@ -25,4 +25,22 @@ public class ReportingService(LoggingContext context, IMemoryCache cache)
         }
         return cachedUserEvents!;
     }
+
+    public async Task<IEnumerable<string?>> GetAllSessionIdsAsync()
+    {
+        return await _context.UserEvents
+            .Select(ue => ue.SessionId)
+            .Distinct()
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<UserEventEntity>> GetUserEventsBySessionIdAsync(string sessionId)
+    {
+        var userEvents = await _context.UserEvents
+            .Where(ue => ue.SessionId == sessionId)
+            .OrderBy(ue => ue.EventTimeStamp)
+            .ToListAsync();
+
+        return userEvents;
+    }
 }

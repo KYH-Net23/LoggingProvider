@@ -29,6 +29,43 @@ public class ReportingController(ReportingService reportingService) : Controller
         }
     }
 
+    [HttpGet("/getUserEvents/sessionIds")]
+    public async Task<IActionResult> GetUserEventsSessionIds()
+    {
+        try
+        {
+            var sessionIds = await _reportingService.GetAllSessionIdsAsync();
+
+            if (sessionIds == null || !sessionIds.Any()) return NotFound("No user event session ids were found.");
+
+            return Ok(sessionIds);
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("/getUserEvents/{sessionId}")]
+    public async Task<IActionResult> GetUserEventsBySessionId(string sessionId)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(sessionId))
+                return BadRequest("Session Id cannot be null or empty.");
+
+            var userEvents = await _reportingService.GetUserEventsBySessionIdAsync(sessionId);
+
+            if (userEvents == null || !userEvents.Any()) return NotFound("No user events found for the requested session.");
+
+            return Ok(userEvents);
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpGet("/getAdminEvents")]
     public async Task<IActionResult> GetAdminEvents()
     {
