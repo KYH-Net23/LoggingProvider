@@ -54,11 +54,11 @@ public class ReportingController(ReportingService reportingService) : Controller
             if (string.IsNullOrWhiteSpace(sessionId))
                 return BadRequest("Session Id cannot be null or empty.");
 
-            var userEvents = await _reportingService.GetUserEventsBySessionIdAsync(sessionId);
+            var userEventResponses = await _reportingService.GetUserEventsBySessionIdAsync(sessionId);
 
-            if (userEvents == null || !userEvents.Any()) return NotFound("No user events found for the requested session.");
+            if (userEventResponses == null || !userEventResponses.Any()) return NotFound("No user events found for the requested session.");
 
-            return Ok(userEvents);
+            return Ok(userEventResponses);
         }
         catch(Exception ex)
         {

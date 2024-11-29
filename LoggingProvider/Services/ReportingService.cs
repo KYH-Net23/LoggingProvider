@@ -1,5 +1,7 @@
 ﻿using LoggingProvider.Contexts;
 using LoggingProvider.Entities;
+using LoggingProvider.Factories;
+using LoggingProvider.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -34,13 +36,15 @@ public class ReportingService(LoggingContext context, IMemoryCache cache)
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<UserEventEntity>> GetUserEventsBySessionIdAsync(string sessionId)
+    public async Task<IEnumerable<UserEventResponse>> GetUserEventsBySessionIdAsync(string sessionId)
     {
         var userEvents = await _context.UserEvents
             .Where(ue => ue.SessionId == sessionId)
             .OrderBy(ue => ue.EventTimeStamp)
             .ToListAsync();
 
-        return userEvents;
+        var userEventResponses = userEvents.Select(userEvent => EventResponseFactory.Create(userEvent));
+
+        return userEventResponses;
     }
 }
