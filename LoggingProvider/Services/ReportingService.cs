@@ -47,4 +47,18 @@ public class ReportingService(LoggingContext context, IMemoryCache cache)
 
         return userEventResponses;
     }
+
+    public async Task<int> GetUserEventsCountAsync()
+    {
+        var cacheKey = $"getUserEventsCount";
+
+        if (!_cache.TryGetValue(cacheKey, out int cachedCount))
+        {
+            cachedCount = await _context.UserEvents.CountAsync();
+
+            _cache.Set(cacheKey, cachedCount, TimeSpan.FromMinutes(10));
+        }
+
+        return cachedCount;
+    }
 }

@@ -66,6 +66,23 @@ public class ReportingController(ReportingService reportingService) : Controller
         }
     }
 
+    [HttpGet("/getUserEvents/count")]
+    public async Task<IActionResult> GetUserEventsCount()
+    {
+        try
+        {
+            var userEventsCount = await _reportingService.GetUserEventsCountAsync();
+
+            if (userEventsCount == 0) return NotFound("No user events were found.");
+
+            return Ok(userEventsCount);
+        }
+        catch (Exception ex) 
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpGet("/getAdminEvents")]
     public async Task<IActionResult> GetAdminEvents()
     {
