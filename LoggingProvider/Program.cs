@@ -24,7 +24,7 @@ namespace LoggingProvider
             //    builder.Configuration.AddAzureKeyVault(vaultUri, new DefaultAzureCredential());
             //}
             //builder.Services.AddDbContext<LoggingContext>(options => options.UseSqlServer(builder.Configuration["LoggingDbSecret"]));
-            builder.Services.AddDbContext<LoggingContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RikaLoggingDB")));
+            builder.Services.AddDbContext<LoggingContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TestingConnection")));
             builder.Services.AddScoped<LoggingService>();
             builder.Services.AddScoped<ReportingService>();
             builder.Services.AddControllers();
