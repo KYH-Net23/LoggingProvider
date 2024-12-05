@@ -100,6 +100,23 @@ public class ReportingController(ReportingService reportingService) : Controller
         }
     }
 
+    [HttpGet("/getUserEvents/event-type-distribution")]
+    public async Task<IActionResult> GetEventTypeDistribution()
+    {
+        try
+        {
+            var result = await _reportingService.GetEventTypeDistribution();
+
+            if (result == null || !result.Any()) return NotFound("No user events were found.");
+
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpGet("/getAdminEvents")]
     public async Task<IActionResult> GetAdminEvents()
     {

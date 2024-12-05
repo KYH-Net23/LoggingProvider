@@ -62,7 +62,7 @@ public class ReportingService(LoggingContext context, IMemoryCache cache)
         return cachedCount;
     }
 
-    public async Task<List<UserEventStatsResponse>> GetUserEventsGroupedByHour()
+    public async Task<IEnumerable<UserEventStatsResponse>> GetUserEventsGroupedByHour()
     {
         var startOfDay = DateTime.Now.Date;
         var endOfDay = startOfDay.AddDays(1);
@@ -99,5 +99,19 @@ public class ReportingService(LoggingContext context, IMemoryCache cache)
 
         }).OrderBy(es => es.HourlyBucket).ToList();
              
+    }
+
+    public async Task<IEnumerable<EventTypeStatsResponse>> GetEventTypeDistribution()
+    {
+        var eventTypeStats = await _context.UserEvents
+            .GroupBy(e => e.EventType)
+            .Select(g => new EventTypeStatsResponse
+            {
+                EventType = g.Key.ToString(),
+                Count = g.Count()
+            })
+            .ToListAsync();
+
+            return eventTypeStats;
     }
 }
