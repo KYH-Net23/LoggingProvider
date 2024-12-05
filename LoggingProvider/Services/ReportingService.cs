@@ -61,4 +61,43 @@ public class ReportingService(LoggingContext context, IMemoryCache cache)
 
         return cachedCount;
     }
+
+    public async Task<List<UserEventStatsResponse>> GetUserEventsGroupedByHour()
+    {
+        var startOfDay = DateTime.Now.Date;
+        var endOfDay = startOfDay.AddDays(1);
+
+        var groupedData = await _context.UserEvents
+            .Where(e => e.EventTimeStamp >= startOfDay && e.EventTimeStamp < endOfDay)
+            .GroupBy(e => new
+            {
+                e.EventTimeStamp.Year,
+                e.EventTimeStamp.Month,
+                e.EventTimeStamp.Day,
+                e.EventTimeStamp.Hour,
+            })
+            .Select(g => new
+            {
+                Year = g.Key.Year,
+                Month = g.Key.Month,
+                Day = g.Key.Day,
+                Hour = g.Key.Hour,
+                EventCount = g.Count()
+            })
+            .ToListAsync();
+
+        return groupedData.Select(g => 
+        {
+            var utcDateTime = new DateTime(g.Year, g.Month, g.Day, g.Hour, 0, 0, DateTimeKind.Utc);
+            var localDateTime = utcDateTime.ToLocalTime();
+
+            return new UserEventStatsResponse
+            {
+                HourlyBucket = localDateTime,
+                EventCount = g.EventCount
+            };
+
+        }).OrderBy(es => es.HourlyBucket).ToList();
+             
+    }
 }

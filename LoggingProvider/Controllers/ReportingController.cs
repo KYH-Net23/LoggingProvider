@@ -83,6 +83,23 @@ public class ReportingController(ReportingService reportingService) : Controller
         }
     }
 
+    [HttpGet("/getUserEvents/daily-events")]
+    public async Task<IActionResult> GetDailyEvents()
+    {
+        try
+        {
+            var userEventStats = await _reportingService.GetUserEventsGroupedByHour();
+
+            if (userEventStats == null || !userEventStats.Any()) return NotFound("No user events were found.");
+
+            return Ok(userEventStats);
+        }
+        catch (Exception ex) 
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpGet("/getAdminEvents")]
     public async Task<IActionResult> GetAdminEvents()
     {
