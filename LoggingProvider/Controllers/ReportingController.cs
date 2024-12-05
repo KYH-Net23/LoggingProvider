@@ -84,11 +84,13 @@ public class ReportingController(ReportingService reportingService) : Controller
     }
 
     [HttpGet("/getUserEvents/daily-events")]
-    public async Task<IActionResult> GetDailyEvents()
+    public async Task<IActionResult> GetDailyEvents([FromQuery] DateTime? date)
     {
         try
         {
-            var userEventStats = await _reportingService.GetUserEventsGroupedByHour();
+            var targetDate = date ?? DateTime.Now.Date;
+
+            var userEventStats = await _reportingService.GetUserEventsGroupedByHour(targetDate);
 
             if (userEventStats == null || !userEventStats.Any()) return NotFound("No user events were found.");
 

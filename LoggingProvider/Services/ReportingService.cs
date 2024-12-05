@@ -62,9 +62,9 @@ public class ReportingService(LoggingContext context, IMemoryCache cache)
         return cachedCount;
     }
 
-    public async Task<IEnumerable<UserEventStatsResponse>> GetUserEventsGroupedByHour()
+    public async Task<IEnumerable<UserEventStatsResponse>> GetUserEventsGroupedByHour(DateTime targetDate)
     {
-        var startOfDay = DateTime.Now.Date;
+        var startOfDay = targetDate.Date;
         var endOfDay = startOfDay.AddDays(1);
 
         var groupedData = await _context.UserEvents
